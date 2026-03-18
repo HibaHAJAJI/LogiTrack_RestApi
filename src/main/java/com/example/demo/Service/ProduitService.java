@@ -1,0 +1,40 @@
+package com.example.demo.Service;
+
+import com.example.demo.Model.Produit;
+import com.example.demo.Repositorie.ProduitRepos;
+import org.springframework.stereotype.Service;
+
+import java.util.List;
+import java.util.Optional;
+
+@Service
+public class ProduitService {
+
+    private final ProduitRepos repos;
+
+    public ProduitService(ProduitRepos repos) {
+        this.repos = repos;
+    }
+
+
+    public Produit ajouterProduit(Produit produit){
+        return repos.save(produit);
+    }
+
+    public List<Produit> afficherProduits(){
+        return repos.findAll();
+    }
+
+    public Optional<Produit>ConsulterParId(Long id){
+        return repos.findProduitById(id);
+    }
+    public void SupprimerParId(Long id){
+        Optional<Produit>produit=repos.findProduitById(id);
+        if(produit.isPresent()){
+            repos.deleteById(id);
+        }else {
+            throw new RuntimeException("Produit introvable");
+        }
+
+    }
+}
