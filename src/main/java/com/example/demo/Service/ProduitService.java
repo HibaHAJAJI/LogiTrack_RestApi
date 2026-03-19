@@ -25,6 +25,19 @@ public class ProduitService {
         return repos.findAll();
     }
 
+    public List<Produit>RechercheProduitParCategorie(String categorie){
+        return repos.findProduitByCategorie(categorie);
+    }
+    public List<Produit>RechercheProduitParPrixInferieur(double prix){
+        return repos.findProduitByPrixLessThan(prix);
+    }
+
+    public List<Produit>getProduitsByPrixInferieur(double prix){
+        return repos.findLowStock();
+    }
+    public Produit getTopProduit(){
+        return repos.findToProduit();
+    }
     public Optional<Produit>ConsulterParId(Long id){
         return repos.findProduitById(id);
     }

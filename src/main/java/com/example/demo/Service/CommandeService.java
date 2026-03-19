@@ -1,5 +1,6 @@
 package com.example.demo.Service;
 
+import com.example.demo.Enum.Statut;
 import com.example.demo.Model.Client;
 import com.example.demo.Model.Commande;
 
@@ -34,20 +35,24 @@ public class CommandeService {
     public List<Commande> afficherCommandes(){
         return commandeRepos.findAll();
     }
-    public Optional<Commande>afficherParId(Long id){
+
+    public Optional<Commande>consulterParId(Long id){
         return commandeRepos.findCommandeById(id);
     }
     public long countCommandes(){
         return commandeRepos.count();
     }
 
+    public  List<Commande>rechercheParClientId(Long clientId){
+        return commandeRepos.findCommandeByClientId(clientId);
+    }
     public Commande creerCommande(Long clientId)throws Exception{
         Client client=clientRepos.findClientById(clientId)
                 .orElseThrow(()->new Exception("Client introvable"));
         Commande commande=new Commande();
         commande.setClient(client);
         commande.setDateCommande(LocalDate.now());
-        commande.setType(Commande.Status.EN_ATTENTE);
+        commande.setStatut(Statut.EN_ATTENTE);
         return commandeRepos.save(commande);
     }
 
@@ -66,4 +71,11 @@ public class CommandeService {
         commande.getLigneCommandes().add(ligne);
         return commandeRepos.save(commande);
     }
+
+    public Commande updateStatus(Long id, Statut statut) throws Exception {
+        Commande commande =commandeRepos.findCommandeById(id)
+                .orElseThrow(()->new Exception("Commande introvable"));
+        commande.setStatut(statut);
+       return commandeRepos.save(commande);
+   }
 }

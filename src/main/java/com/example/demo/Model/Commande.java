@@ -1,6 +1,5 @@
 package com.example.demo.Model;
-
-import ch.qos.logback.core.status.Status;
+import com.example.demo.Enum.Statut;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
@@ -15,7 +14,7 @@ public class Commande {
     private Long id;
     @Column(nullable = false)
     private LocalDate dateCommande;
-    private Status type;
+    private Statut statut;
 
     @ManyToOne
     @JoinColumn(name = "client_id")
@@ -23,12 +22,6 @@ public class Commande {
     @OneToMany(mappedBy = "commande",cascade = CascadeType.ALL)
     private List<LigneCommande > ligneCommandes;
 
-
-    public enum Status{
-        EN_ATTENTE,
-        EXPEDIEE,
-        LIVREE
-    }
     public Commande() {}
 
     public Long getId() {
@@ -47,12 +40,12 @@ public class Commande {
         this.dateCommande = dateCommande;
     }
 
-    public Status getType() {
-        return type;
+    public Statut getStatut() {
+        return statut;
     }
 
-    public void setType(Status type) {
-        this.type = type;
+    public void setStatut(Statut statut) {
+        this.statut = statut;
     }
 
     public List<LigneCommande> getLigneCommandes() {
@@ -76,7 +69,7 @@ public class Commande {
         return "Commande{" +
                 "id=" + id +
                 ", dateCommande=" + dateCommande +
-                ", type=" + type +
+                ", statut=" + statut +
                 ", client=" + client +
                 ", ligneCommandes=" + ligneCommandes +
                 '}';

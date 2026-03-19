@@ -33,4 +33,13 @@ public class ProduitController {
     public void delete(@PathVariable Long id){
          produitService.SupprimerParId(id);
     }
+
+    @GetMapping("/category/{category}")
+    public List<Produit>findProduitParCategorie(@PathVariable String category){
+        return produitService.RechercheProduitParCategorie(category);
+    }
+    @GetMapping("/price/{price}")
+    public List<Produit>findProduitinfirieur(@PathVariable double prix){
+     return produitService.getProduitsByPrixInferieur(prix);
+    }
 }
