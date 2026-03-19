@@ -33,7 +33,7 @@ public class ProduitService {
     }
 
     public List<Produit>getProduitsByPrixInferieur(double prix){
-        return repos.findLowStock();
+        return repos.findProduitByPrixLessThan(prix);
     }
     public Produit getTopProduit(){
         return repos.findToProduit();

@@ -16,7 +16,7 @@ public interface ProduitRepos extends JpaRepository<Produit,Long> {
     List<Produit> findProduitByPrixLessThan(double prix);
 
     @Query("select p from Produit p where p.quantiteStock<2 ")
-    List<Produit>findLowStock();
+    List<Produit> findLowStock();
 
     @Query("select  ligne from LigneCommande ligne group by ligne.produit order by  sum (ligne.quantite)desc ")
     Produit findToProduit();

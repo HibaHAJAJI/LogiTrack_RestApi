@@ -45,4 +45,12 @@ public class ProduitController {
     public List<Produit>findProduitinfirieur(@PathVariable double prix){
      return produitService.getProduitsByPrixInferieur(prix);
     }
+    @GetMapping("/api/statistics/top-product")
+    public Produit TopProduit(){
+        return produitService.getTopProduit();
+    }
+    @GetMapping("/api/products/low-stock")
+    public List<Produit> afficherProduitParStockFaible(@RequestParam double prix){
+        return produitService.getProduitsByPrixInferieur(prix);
+    }
 }
