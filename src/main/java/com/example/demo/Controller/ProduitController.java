@@ -21,15 +21,18 @@ public class ProduitController {
     public List<Produit> afficherTous(){
         return produitService.afficherProduits();
     }
-    @GetMapping("{id}")
+
+    @GetMapping("/{id}")
     public Optional<Produit>afficherUneProduit(@PathVariable Long id){
         return produitService.ConsulterParId(id);
     }
+
     @PostMapping
-    public Produit save(Produit produit){
+    public Produit save(@RequestBody Produit produit){
         return produitService.ajouterProduit(produit);
     }
-    @DeleteMapping("{id}")
+
+    @DeleteMapping("/{id}")
     public void delete(@PathVariable Long id){
          produitService.SupprimerParId(id);
     }
@@ -38,7 +41,7 @@ public class ProduitController {
     public List<Produit>findProduitParCategorie(@PathVariable String category){
         return produitService.RechercheProduitParCategorie(category);
     }
-    @GetMapping("/price/{price}")
+    @GetMapping("/price/{prix}")
     public List<Produit>findProduitinfirieur(@PathVariable double prix){
      return produitService.getProduitsByPrixInferieur(prix);
     }

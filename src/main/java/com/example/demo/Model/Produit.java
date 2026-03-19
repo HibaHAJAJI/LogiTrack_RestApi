@@ -10,15 +10,16 @@ public class Produit {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
+    @Column(nullable = false)
     private String nom;
+    @Column(nullable = false)
     private String categorie;
     private double prix;
     private  int quantiteStock;
     @OneToMany(mappedBy = "produit",cascade = CascadeType.ALL)
     List<LigneCommande >LigneCommande;
 
-    public Produit(Long id, String nom, String categorie, double prix, int quantiteStock) {
-        this.id = id;
+    public Produit( String nom, String categorie, double prix, int quantiteStock) {
         this.nom = nom;
         this.categorie = categorie;
         this.prix = prix;
@@ -26,7 +27,6 @@ public class Produit {
     }
 
     public Produit() {
-
     }
 
     public Long getId() {
